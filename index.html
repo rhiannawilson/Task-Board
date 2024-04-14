@@ -20,62 +20,74 @@
     <h1 class="display-3">Task Board</h1>
     <p class="lead">A simple Kanban board for task management</p>
   </header>
+
+
   <div class="container">
     <div class="text-center mb-5">
       <button id="myBtn" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#formModal">Add Task</button>
-</div>
     </div>
-    <!-- Todo: Create a modal with a form to add tasks -->
-
-<!-- The Modal -->
-<div id="myModal" class="modal">
-
-  <!-- Modal content -->
-  <div class="modal-content">
-    <span class="close">&times;</span>
-
-
-
-<div class="bg-light min-100-vh flex-row align-center justify-center">
-  <div class="col-11 col-sm-8">
-  <h1 class="add-task">Add Task</h1>
-  
-  <div class="card rounded bg-light p-3">
-  <div class="card-body">
-  
-    <form id="modalForm">
-      <div class="row">
-        <div class="col-12 col-sm-6">
-          <label for="task-title">Task Title</label>
-          <input id="task-title" type="text" class="form-input" name="task-title" placeholder="Enter Your Task Title Here" />
-
-          <label for="Task-Due-Date">Task Due Date</label>
-          <input id="Task-Due-Date" type="text" class="form-input" name="Task-Due-Date" placeholder="When's it due by?" />
-
-          <label for="Task-Description">Task Description</label>
-          <input id="Task-Description" type="text" class="form-input" name="Task-Description" placeholder="Description" />
-        </div>
-      </form>
   </div>
 
-</div>
+  
+  <!-- Todo: Create a modal with a form to add tasks -->
 
-<!-- 
+  <!-- The Modal -->
+  <div id="myModal" class="modal">
 
-    <div class="row swim-lanes text-center justify-content-between">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close">&times;</span>
+
+
+      <div class="bg-light min-100-vh flex-row align-center justify-center">
+        <div class="col-11 col-sm-8">
+          <h1 class="add-task">Add Task</h1>
+          <div class="card rounded bg-light p-3">
+            <div class="card-body">
+
+              <form id="modalForm">
+                <div class="row">
+                  <div class="col-12 col-sm-6">
+                    <label for="task-title">Task Title</label>
+                    <input id="task-title" type="text" class="form-input" name="task-title"
+                      placeholder="Enter Your Task Title Here" />
+
+                    <label for="task-due-date">Task Due Date</label>
+                    <input id="task-due-date" type="text" class="form-input" name="task-due-date"
+                      placeholder="When's it due by?" />
+
+                    <label for="task-description">Task Description</label>
+                    <input id="task-description" type="text" class="form-input" name="task-description"
+                      placeholder="Description" />
+                    <button class="submitBtn">Submit</button>
+                    </div>
+                    </div>
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+<!-- TASK CARDS SECTION  -->
+<main>
+ 
+      <div class="row swim-lanes text-center justify-content-between">
       <div class="col-12 col-lg-4 d-flex">
         <div id="to-do" class="card border-light mb-3 lane flex-grow-1">
           <div class="card-header bg-white">
             <h2 class="card-title mb-1">To Do</h2>
-        </div>
-         
+          </div>
           <div class="card-body bg-light">
-          
             <div id="todo-cards"></div>
-          
           </div>
         </div>
       </div>
+
 
       <div class="col-12 col-lg-4 d-flex">
         <div id="in-progress" class="card border-light mb-3 lane flex-grow-1">
@@ -86,19 +98,34 @@
             <div id="in-progress-cards"></div>
           </div>
         </div>
+      </div>
+
+
+      <div class="col-12 col-lg-4 d-flex">
+        <div id="done" class="card border-light mb-3 lane flex-grow-1">
+          <div class="card-header bg-white">
+            <h2 class="card-title mb-1">Done</h2>
+          </div>
+          <div class="card-body bg-light">
+            <div id="done-cards"></div>
+          </div>
         </div>
-        <div class="col-12 col-lg-4 d-flex">
-          <div id="done" class="card border-light mb-3 lane flex-grow-1">
-            <div class="card-header bg-white">
-              <h2 class="card-title mb-1">Done</h2>
-            </div>
-            <div class="card-body bg-light">
-              <div id="done-cards"></div>
-          </div>
-          </div>
       </div>
     </div>
-  </div> -->
+  </main>
+<!-- TASK CARDS SECTION  -->
+
+
+<div id="task-container">
+  <!-- Task cards will be appended here -->
+</div>
+
+
+
+
+
+
+
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
