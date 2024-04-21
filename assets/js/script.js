@@ -1,7 +1,7 @@
 // Retrieve tasks and nextId from localStorage
-let taskList = JSON.parse(localStorage.getItem("tasks"));
-let nextId = JSON.parse(localStorage.getItem("nextId"));
-let taskId = JSON.parse(localStorage.getItem("taskId"));
+// let taskList = JSON.parse(localStorage.getItem("tasks"));
+// let nextId = JSON.parse(localStorage.getItem("nextId"));
+// let taskId = JSON.parse(localStorage.getItem("taskId"));
 
 // Todo: create a function to generate a unique task id
 function generateTaskId() {
@@ -9,30 +9,46 @@ function generateTaskId() {
 }
 
 
-// MY CODE - Modal - WORKS ----------------------------------------------------------
+// MY CODE - Modal ----------------------------------------------------------
 // // Get the modal
 const modal = document.getElementById("myModal");
 
-// // Get the button that opens the modal
-const btn = document.getElementById("myBtn");
+// // Get submit button that opens the modal
+// const submitBtn = document.getElementById("submitBtn");
+const addTaskBtn = document.getElementById("addTaskBtn");
+const taskTitle = $("#task-title");
+const taskDueDate = $("#task-due-date");
+const taskDescription = $("#task-description");
+const taskList = [];
 
+function addTask(taskTitle, taskDescription, taskDueDate) {
+  const newTask = { 
+    title: taskTitle, 
+    description: taskDescription,
+    dueDate: taskDueDate 
+  };
+  taskList.push(newTask);
+ console.log ('newTask')
+};
 
-// // Get the <span> element that closes the modal
-const span = document.getElementsByClassName("close")[0];
+// // Get the closeBtn element that closes the modal
+const closeBtn = document.getElementsByClassName("close")[0];
 
 // // When the user clicks on the button, open the modal
-btn.onclick = function() {
+addTaskBtn.onclick = function() {
   modal.style.display = "block";
+}
+
+// submitBtn.onclick = function(event) {
+//   event.preventDefault();
+//   alert ('submitted form');
 // }
 
 // // When the user clicks on <span> (x), close the modal
- span.onclick = function() {
+ closeBtn.onclick = function() {
    modal.style.display = "none";
-  return;
- }
-}
-// MY CODE FOR MODAL--------------------------------------------------------------------
 
+ }
 
 // Todo: create a function to create a task card
 function createTaskCard(task) {
@@ -62,87 +78,68 @@ function createTaskCard(task) {
 }
 
 
-// MY CODE - CARD ELEMENT  DIDN:T WORK... -------------------------------------------
-//   // create the card elements
-//   let card = document.createElement('div');
-//   let taskTitle = document.createElement('h1');
-//   let taskDescription = document.createElement('h2');
-//   let taskDueDate= document.createElement('p');
-
-//   // assign classes 
-//   card.classList.add('card')
-//   taskTitle.classList.add('task-title');
-//   taskDescription.classList.add('task-description');
-//   taskDueDate.classList.add('task-due-date');
-
-//   // set content
-//   taskTitle.textContent = task.taskTitle;
-//   taskDescription.textContent = task.taskDescription;
-//   taskDueDate.textContent = task.taskDueDate;
-
-//   // append elements to card 
-//     card.appendChild(taskTitle);
-//     card.appendChild(taskDescription);
-//     card.appendChild(taskDueDate);
-
-//     return card; }
-
-// taskCards = createTaskCard(task);
-// document.body.appendChild(taskCards);
-
-// id="todo-cards" id="in-progress-cards" id="done-cards"
-
-// MY CODE - CARD ELEMENT  DIDN:T WORK... ---------------------------------------
-
 // Todo: create a function to render the task list and make cards draggable
 function renderTaskList() {
   const taskContainer = $('#task-container');
   taskContainer.empty(); // Clears previous content
 
 // Create task cards and make them draggable
-tasks.forEach(task => {
+taskList.forEach(task => {
     const taskCardElement = createTaskCard(task); // Assuming you have a createTaskCard function
 
     // Make the task card draggable using jQuery UI Draggable
-    taskCardElement.draggable();
+    // taskCardElement.draggable();
 
-    taskContainer.append(taskCardElement);
+  taskContainer.append(taskCardElement);
+
+  let toDoCards = $('#todo-cards');
+  toDoCards.innerhtml = ''; // clears existing content
+
+  taskList.forEach((task, index) => {
+    const taskElement = document.createElement('div');
+    taskElement.innerHTML = `
+    <h3>${task.title}</h3>
+    <p>${task.description}</p>
+    <p>${task.dueDate}</p>
+    `;
 });
-}
 
 
 // Todo: create a function to handle adding a new task
 function handleAddTask(event){
-  function handleAddTask(event) {
-    event.preventDefault(); // Prevent the default form submission behavior
+  event.preventDefault(); // Prevent the default form submission behavior
 
-    // Access the input values for the new task
-    const title = document.getElementById('taskTitle').value;
-    const description = document.getElementById('taskDescription').value;
-    const deadline = document.getElementById('taskDeadline').value;
+//     // Access the input values for the new task
+//     const title = document.getElementById('taskTitle').value;
+//     const description = document.getElementById('taskDescription').value;
+//     const dueDate = document.getElementById('taskDueDate').value;
 
-    // Create a new task object with the input values
+//     // Create a new task object with the input values
     const newTask = {
-        title: title,
-        description: description,
-        deadline: deadline
+        title: taskTitle.val(),
+        description: taskDescription.val(),
+        dueDate: taskDueDate.val() 
     };
 
-    // Add the new task to the task board or task list
-    // Implement the logic to add the task as per your application requirements
-    // For example, you can update the UI to display the new task in the appropriate column
+    taskList.push(newTask);
+    console.log(taskList);
 
-    console.log('New Task:', newTask); // For testing purposes, log the new task object
 
-    // Clear the input fields after adding the task
-    document.getElementById('taskTitle').value = '';
-    document.getElementById('taskDescription').value = '';
-    document.getElementById('taskDeadline').value = '';
+    renderTaskList();
+  };
+  
+//     // Add the new task to the task board or task list
+//     // Implement the logic to add the task as per your application requirements
+//     // For example, you can update the UI to display the new task in the appropriate column
 
-    // Call the renderTaskList function to render the task list
-renderTaskList();
-}
-}
+//     console.log('New Task:', newTask); // For testing purposes, log the new task object
+
+//     // Clear the input fields after adding the task
+//     document.getElementById('taskTitle').value = '';
+//     document.getElementById('taskDescription').value = '';
+//     document.getElementById('taskDeadline').value = '';
+
+//     // Call the renderTaskList function to render the task list
 
 
 // Todo: create a function to handle deleting a task
@@ -190,24 +187,18 @@ function handleDrop(event, ui) {
 
 // Todo: when the page loads, render the task list, add event listeners, make lanes droppable, and make the due date field a date picker
 $(document).ready(function () {
-  $(document).ready(function () {
     // Render the task list when the page loads
     renderTaskList();
 
     // Add event listeners for specific actions (e.g., adding a task, deleting a task)
     $('#addTaskForm').submit(handleAddTask); // Assuming you have a form with id 'addTaskForm' for adding tasks
-    $('.delete-task-btn').click(handleDeleteTask); // Assuming you have a delete button with class 'delete-task-btn' for each task
+    // $('.delete-task-btn').click(handleDeleteTask); // Assuming you have a delete button with class 'delete-task-btn' for each task
 
-    // Make lanes droppable using jQuery UI's droppable feature
-    $('.status-lane').droppable({
-        drop: handleDrop // Assuming you have status lanes with class 'status-lane' where tasks can be dropped
-    });
+    // // Make lanes droppable using jQuery UI's droppable feature
+    // $('.status-lane').droppable({
+    //     drop: handleDrop // Assuming you have status lanes with class 'status-lane' where tasks can be dropped
+    // });
 
-    // Make the due date field a date picker using jQuery UI's datepicker widget
-    $('#taskDueDate').datepicker(); // Assuming you have an input field with id 'taskDueDate' for the due date of tasks
+    // // Make the due date field a date picker using jQuery UI's datepicker widget
+    // $('#taskDueDate').datepicker(); // Assuming you have an input field with id 'taskDueDate' for the due date of tasks
 });
-});
-
-
-
-
