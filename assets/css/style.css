@@ -91,3 +91,9 @@ li {
   flex-wrap: wrap;
   justify-content: center;
 }
+
+.task-card {
+  border: 1px solid black;
+  background-color: blue;
+  color: white;
+}

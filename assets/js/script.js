@@ -3,13 +3,28 @@
 // let nextId = JSON.parse(localStorage.getItem("nextId"));
 // let taskId = JSON.parse(localStorage.getItem("taskId"));
 
-// Todo: create a function to generate a unique task id
-function generateTaskId() {
+// the 'How it Works HTML button' 
+function myFunction() {
+  confirm(`Welcome to your task board, where you can manage all your tasks in one place! 
 
+Select the green 'ADD TASK' button to create a new task, input the task details and press SUBMIT.
+All new tasks will start in the TO DO column. From there you can DRAG your tasks to the IN PROGRESS or DONE column.
+
+        Happy Tasking! 
+
+Additional info:  
+- yellow tasks = near deadline
+- red tasks = task overdue`);
 }
 
+// Todo: create a function to generate a unique task id
+let taskIDCounter = 1;
+function generateTaskId() {
+  const taskID = taskIDCounter;
+  taskIDCounter ++;
+  return taskID;
+};
 
-// MY CODE - Modal ----------------------------------------------------------
 // // Get the modal
 const modal = document.getElementById("myModal");
 
@@ -19,64 +34,124 @@ const addTaskBtn = document.getElementById("addTaskBtn");
 const taskTitle = $("#task-title");
 const taskDueDate = $("#task-due-date");
 const taskDescription = $("#task-description");
+// const renderTaskList =$('renderTaskList')
 const taskList = [];
 
 function addTask(taskTitle, taskDescription, taskDueDate) {
   const newTask = { 
+    id: taskId,
     title: taskTitle, 
     description: taskDescription,
     dueDate: taskDueDate 
   };
+      // Add the new task to the taskList array
   taskList.push(newTask);
- console.log ('newTask')
+
+// Log the new task for verification
+console.log(newTask);
 };
 
-// // Get the closeBtn element that closes the modal
-const closeBtn = document.getElementsByClassName("close")[0];
+// Get the closeBtn element that closes the modal
+const closeBtn = document.querySelector('.close');
+const myModal = document.getElementById('myModal');
 
-// // When the user clicks on the button, open the modal
+// When the user clicks on the button, open the modal
 addTaskBtn.onclick = function() {
-  modal.style.display = "block";
+    modal.style.display = "inline";
 }
 
-// submitBtn.onclick = function(event) {
-//   event.preventDefault();
-//   alert ('submitted form');
-// }
+// Function to close the modal
+function closeModal() {
+    modal.style.display = 'none';
+}
 
-// // When the user clicks on <span> (x), close the modal
- closeBtn.onclick = function() {
-   modal.style.display = "none";
+// Event listener for the close button
+closeBtn.addEventListener('click', closeModal);
 
- }
+// Optional: Close the modal when clicking outside of it
+window.addEventListener('click', function(event) {
+    if (event.target === modal) {
+        closeModal();
+    }
+});
 
-// Todo: create a function to create a task card
 function createTaskCard(task) {
-  const taskCard = document.createElement('div');
-  taskCard.classList.add('task-card');
+  const taskCardElement = $('<div>').addClass('task-card');
+
+  // Create elements for title, description, and due date
+  const titleElement = $('<h3>').text(task.title);
+  const descriptionElement = $('<p>').text(task.description);
+  const dueDateElement = $('<p>').text('Due Date: ' + task.dueDate);
+
+  // Append title, description, and due date elements to the task card
+  taskCardElement.append(titleElement, descriptionElement, dueDateElement);
+
+  // Convert the jQuery object to a DOM element
+  const taskCardDOMElement = taskCardElement.get(0);
+
+  return $(taskCardDOMElement); // Return the jQuery object
+}
 
 
-  // Create elements for the task details
-  const title = document.createElement('h3');
-  title.textContent = task.title;
+
+// //   // Create elements for the task details
+//   const title = document.createElement('h3');
+//  title.textContent = task.title;
 
 
-  const description = document.createElement('p');
-  description.textContent = task.description;
+//   const description = document.createElement('p');
+//  description.textContent = task.description;
  
-  const dueDate = document.createElement('p');
-  dueDate.textContent = 'Date: ' + task.dueDate;
+//  const dueDate = document.createElement('p');
+//  dueDate.textContent = 'Date: ' + task.dueDate;
 
   
-  // Append task details to the task card
-  taskCard.appendChild(title);
-  taskCard.appendChild(description);
-  taskCard.appendChild(dueDate);
+// //   // Append task details to the task card
+//  taskCard.appendChild(title);
+//  taskCard.appendChild(description);
+//  taskCard.appendChild(dueDate);
 
-  // Return the task card element
-  return taskCard;
+
+
+// ai test code
+function renderTaskList() {
+    const taskContainer = $('#task-container');
+    taskContainer.empty(); // Clears previous content
+
+    taskList.forEach(task => {
+        const taskCardElement = createTaskCard(task); // Assuming you have a createTaskCard function
+
+        if (taskCardElement instanceof jQuery) {
+            taskCardElement.addClass('task-card'); // Add a class for styling
+            $('#todo-cards').append(taskCardElement); // Append the styled task card to the "To Do" column
+        } else {
+            console.error('taskCardElement is not a jQuery object');
+        }
+    });
+
+    const toDoCards = $('#todo-cards');
+    toDoCards.empty(); // Clears existing content
+
+    taskList.forEach((task, index) => {
+        const taskElement = document.createElement('div');
+        taskElement.innerHTML = `
+            <h3>${task.title}</h3>
+            <p>${task.description}</p>
+            <p>${task.dueDate}</p>
+        `;
+    });
 }
 
+renderTaskList();
+// AI test code
+
+
+
+
+
+
+
+// test
 
 // Todo: create a function to render the task list and make cards draggable
 function renderTaskList() {
@@ -88,21 +163,39 @@ taskList.forEach(task => {
     const taskCardElement = createTaskCard(task); // Assuming you have a createTaskCard function
 
     // Make the task card draggable using jQuery UI Draggable
-    // taskCardElement.draggable();
+  // taskCardElement.draggable();
+   // Check if taskCardElement is a jQuery object
+   if (taskCardElement instanceof jQuery) {
+    // Style the task card element
+    taskCardElement.addClass('task-card'); // Add a class for styling
 
-  taskContainer.append(taskCardElement);
-
+    // Append the styled task card to the "To Do" column
+    $('#todo-cards').append(taskCardElement);
+} else {
+    console.error('taskCardElement is not a jQuery object');
+}
+});
   let toDoCards = $('#todo-cards');
-  toDoCards.innerhtml = ''; // clears existing content
+  toDoCards.innerHTML = ''; // clears existing content
 
   taskList.forEach((task, index) => {
     const taskElement = document.createElement('div');
     taskElement.innerHTML = `
-    <h3>${task.title}</h3>
-    <p>${task.description}</p>
-    <p>${task.dueDate}</p>
+    <h3>${task.task-title}</h3>
+    <p>${task.task-description}</p>
+    <p>${task.task-dueDate}</p>
     `;
 });
+}
+renderTaskList();
+
+
+// test
+
+
+
+
+
 
 
 // Todo: create a function to handle adding a new task
@@ -120,30 +213,15 @@ function handleAddTask(event){
         description: taskDescription.val(),
         dueDate: taskDueDate.val() 
     };
-
     taskList.push(newTask);
     console.log(taskList);
-
-
     renderTaskList();
   };
   
-//     // Add the new task to the task board or task list
-//     // Implement the logic to add the task as per your application requirements
-//     // For example, you can update the UI to display the new task in the appropriate column
-
-//     console.log('New Task:', newTask); // For testing purposes, log the new task object
-
-//     // Clear the input fields after adding the task
-//     document.getElementById('taskTitle').value = '';
-//     document.getElementById('taskDescription').value = '';
-//     document.getElementById('taskDeadline').value = '';
-
-//     // Call the renderTaskList function to render the task list
-
 
 // Todo: create a function to handle deleting a task
 function handleDeleteTask(event){
+
  // Access the task ID or any other identifier from the event
  const taskId = event.target.dataset.taskId; // Assuming you have a data attribute 'data-task-id' on the task element
 
