@@ -38,14 +38,19 @@ body {
   width: 80%; /* Could be more or less, depending on screen size */
 }
 
-
 /* The Close Button */
+
+span {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+}
+
 .close {
   color: #aaa;
-  float: right;
-  font-size: 28px;
+  font-size: 48px;
   font-weight: bold;
-}
+ }
 
 .close:hover,
 .close:focus {
