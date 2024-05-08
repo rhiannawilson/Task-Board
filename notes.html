@@ -1,0 +1,319 @@
+
+// let modalForm = document.getElementById("modalForm");
+
+// let addTaskBtn = document.getElementById("addTaskBtn");
+// let taskTitle = $("#task-title");
+// let taskDescription = $("#task-description");
+// let taskDueDate = $("#task-due-date");
+// let renderTaskList =$('renderTaskList')
+
+
+// function addTask(Title, Description, DueDate) {
+//   let newTask = { 
+//     id: generateTaskID,
+//     title: Title, 
+//     description: Description,
+//     dueDate: DueDate 
+//   };
+//       // Add the new task to the taskList array
+//   taskList.push(newTask);
+
+// // Log the new task for verification
+// console.log(newTask);
+// };
+
+// // Get the closeBtn element that closes the modal
+// let closeBtn = document.querySelector('.close');
+// let myModal = document.getElementById('myModal');
+
+// // When the user clicks on the button, open the modal
+// addTaskBtn.onclick = function() {
+//     modal.style.display = "inline";
+// }
+
+// // Function to close the modal
+// function closeModal() {
+//     modal.style.display = 'none';
+// }
+
+// // Event listener for the close button
+// closeBtn.addEventListener('click', closeModal);
+
+// // Optional: Close the modal when clicking outside of it
+// window.addEventListener('click', function(event) {
+//     if (event.target === modal) {
+//         closeModal();
+//     }
+// });
+
+
+
+// function createTaskCard(taskTitle, taskDescription, dueDate) {
+//   let taskCardElement = $('div').addClass('task-card');
+//   // Create elements for title, description, and due date
+//   let titleElement = $('h3').text(task.title);
+//   let descriptionElement = $('p').text(task.description);
+//   let dueDateElement = $('p').text('Due Date: ' + task.dueDate);
+
+//   // Append title, description, and due date elements to the task card
+//   taskCardElement.append(titleElement, descriptionElement, dueDateElement);
+
+//   // Convert the jQuery object to a DOM element
+//   let taskCardDOMElement = taskCardElement.get(0);
+
+//   return $(taskCardDOMElement); // Return the jQuery object
+// }
+
+//     taskList.forEach((task, index) => {
+//       let taskElement = document.createElement('div');
+//         taskElement.innerHTML = `
+//             <h3>${task.title}</h3>
+//             <p>${task.description}</p>
+//             <p>${task.dueDate}</p>
+//         `;
+//     });
+
+
+// // Todo: create a function to handle adding a new task
+// function handleAddTask(event){
+//   event.preventDefault(); // Prevent the default form submission behavior
+
+//   console.log()
+//  // Create a new task object with the input values
+// let newTask = {
+//         title: taskTitle.val(),
+//         description: taskDescription.val(),
+//         dueDate: taskDueDate.val() 
+//     };
+//     taskList.push(newTask);
+//     console.log(taskList);
+//     renderTaskList();
+//   };
+  
+
+// // Todo: create a function to handle deleting a task
+// function handleDeleteTask(event){
+
+//  // Access the task ID or any other identifier from the event
+//  let taskId = event.target.dataset.taskId; // Assuming you have a data attribute 'data-task-id' on the task element
+//  console.log('Deleting Task with ID:', taskId);
+
+//  renderTaskList();
+// }
+
+// // Todo: create a function to handle dropping a task into a new status lane
+// function handleDrop(event, ui) {
+//   // Access the dropped task element
+//   let droppedTask = ui.draggable;
+
+//   // Access the ID or any other identifier of the dropped task
+//   let taskId = droppedTask.attr('data-task-id');
+
+//   // Access the ID or class of the new status lane where the task is dropped
+//   let newStatusLaneId = $(this).attr('id');
+
+//   // Implement the logic to update the status of the dropped task and move it to the new status lane
+//   // You can update the task's status in the data model and reposition the task element in the DOM
+
+//   console.log('Dropped Task ID:', taskId);
+//   console.log('New Status Lane ID:', newStatusLaneId);
+
+//   // Update the UI to reflect the task's new status and position
+//   // For example, you can move the task element to the new status lane in the UI
+
+//   // After dropping the task into a new status lane, you may want to save the updated task data
+//   // and re-render the task list to reflect the changes
+//   saveUpdatedTaskStatus(taskId, newStatusLaneId);
+//   renderTaskList();
+// }
+
+// // Todo: when the page loads, render the task list, add event listeners, make lanes droppable, and make the due date field a date picker
+// $(document).ready(function () {
+//     // Render the task list when the page loads
+//     renderTaskList();
+
+//     // Add event listeners for specific actions (e.g., adding a task, deleting a task)
+//     $('#addTaskForm').submit(handleAddTask); // Assuming you have a form with id 'addTaskForm' for adding tasks
+//     // $('.delete-task-btn').click(handleDeleteTask); // Assuming you have a delete button with class 'delete-task-btn' for each task
+
+//     // // Make lanes droppable using jQuery UI's droppable feature
+//     // $('.status-lane').droppable({
+//     //     drop: handleDrop // Assuming you have status lanes with class 'status-lane' where tasks can be dropped
+//     // });
+
+//     // // Make the due date field a date picker using jQuery UI's datepicker widget
+//     // $('#taskDueDate').datepicker(); // Assuming you have an input field with id 'taskDueDate' for the due date of tasks
+// });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//  STEP 1 & 2 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+// Retrieve tasks and nextId from localStorage
+// const taskList = JSON.parse(localStorage.getItem("tasks"));
+// const nextId = JSON.parse(localStorage.getItem("nextId"));
+
+// Todo: create a function to generate a unique task id
+// function generateTaskId() {}
+
+
+// // Retrieve taskList and nextId from localStorage or initialize them if not present
+// const taskList = JSON.parse(localStorage.getItem("taskList")) || [];
+// const nextId = JSON.parse(localStorage.getItem("nextId")) || 1;
+
+// // Function to generate a unique task ID
+// function generateTaskId() {
+//     // Retrieve the current nextId from localStorage
+//     let currentNextId = JSON.parse(localStorage.getItem('nextId')) || 1;
+
+//     // Increment the nextId for the next task
+//     currentNextId++;
+
+//     // Update the nextId in localStorage for future use
+//     localStorage.setItem('nextId', JSON.stringify(currentNextId));
+
+//     return currentNextId;
+// }
+
+// // Set initial nextId value in localStorage
+// localStorage.setItem('nextId', JSON.stringify(100)); // Set an initial value, such as 100
+
+// // Test the generateTaskId function
+// const taskId1 = generateTaskId();
+// const taskId2 = generateTaskId();
+
+// console.log("Generated Task ID 1:", taskId1);
+// console.log("Generated Task ID 2:", taskId2);
+
+
+// // Function to create a task card based on a task object
+// function createTaskCard(task) {
+//   // Construct the HTML structure for the task card
+//   const taskCard = `
+//       <div class="task-card">
+//           <h3>${task.title}</h3>
+//           <p>${task.description}</p>
+//           <p>Due Date: ${task.dueDate}</p>
+//           <p>Status: ${task.status}</p>
+//       </div>
+//   `;
+
+//   return taskCard;
+// }
+
+// // Example task object
+// const task = {
+//   title: "Task 1",
+//   description: "Description for Task 1",
+//   dueDate: "2022-12-31",
+//   status: "In Progress"
+// };
+
+// // Create a task card using the createTaskCard function
+// const taskCardHtml = createTaskCard(task);
+// console.log(taskCardHtml); // Output the generated task card HTML
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// //  STEP 3  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+// // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+// // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+// // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+// // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+// // Function to create a task card based on a task object
+// function createTaskCard(task) {
+//   // Construct the HTML structure for the task card
+//   const taskCard = `
+//       <div class="task-card">
+//           <h3>${task.title}</h3>
+//           <p>${task.description}</p>
+//           <p>Due Date: ${task.dueDate}</p>
+//           <p>Status: ${task.status}</p>
+//       </div>
+//   `;
+
+//   return taskCard;
+// }
+
+// // Example task object
+// const task = {
+//   title: "Task 1",
+//   description: "Description for Task 1",
+//   dueDate: "2022-12-31",
+//   status: "In Progress"
+// };
+
+// // Create a task card using the createTaskCard function
+// const taskCardHtml = createTaskCard(task);
+// console.log(taskCardHtml); // Output the generated task card HTML
+
+
+
+// // // Use Day.js to format the following variables:
+// // 1. What is today's date in the following format: Jan 1st, 1999?
+// const today = dayjs();
+// $('#1a').text(today.format('MMM D, YYYY'));
+
+// // 2. What is the day of the week today?
+// const dayWeek = today.format('[Today is] dddd');
+// $('#2a').text(dayWeek);
+
+// // 3. Parse the following date, 11/3/2020, and convert it into the following format: Sunday, February 14 2010, 3:25:50 pm.
+// const reformatDate = dayjs('2020-11-03').format('dddd, MMMM D YYYY, h:mm:ss a');
+// $('#3a').text(reformatDate);
+
+// // 4. I need to place my recycling bin on the curb on every odd week of the year for collection. Do I need to put out my recycling bin out this week?
+// // Dayjs' .diff() method does NOT include partial weeks in its calculation.
+// const beginningOfYear = dayjs('2022-01-01');
+// const weekNum = today.diff(beginningOfYear, 'week');
+
+// // Check for odd week, then assign boolean to variable
+// let  takeOut = weekNum % 2 === 1;
+// $('#4a').text(`${takeOut}, because it's currently week  ${weekNum}`);
+
+
+
