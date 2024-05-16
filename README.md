@@ -51,6 +51,9 @@ The following animation demonstrates the application functionality:
 > > > images
 > > > [text](assets/images)
 ![colour coded tasks based on date](<assets/images/Img1 - Colour coded tasks based on date.png>)
+![alt text](<assets/images/Img2 - Colour removed once DONE .png>)
+![alt text](<assets/images/Img3 - ModalForm.png>)
+![alt text](<assets/images/Img4 - Instructions Pop Up.png>)
 
 > > > js
 > > > - script.js
