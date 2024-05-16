@@ -1,4 +1,4 @@
-# Task Board Management Tool
+# Task Board 
 
 Task Board Management Tool
 
@@ -79,17 +79,7 @@ The following animation demonstrates the application functionality:
 
 #### Images 
 
-- Site Page 
-![Website Page Image](./assets/images/Img1%20-%20Colour%20coded%20tasks%20based%20on%20date.png)
-
-- Done Column Display
-![Done Column Display Image](./assets/images/Img2%20-%20Colour%20removed%20once%20DONE%20.png)
-
-- Modal form
-![Modal Form Display](./assets/images/Img3%20-%20ModalForm.png)
-
-- Pop Up
-![Pop Up Image](./assets/images/Img3%20-%20Instructions%20Pop%20Up.png)
+- see above in file structure
 
 ## Credits
 N/A
