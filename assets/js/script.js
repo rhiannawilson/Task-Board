@@ -161,9 +161,18 @@ function handleDrop(event, ui) {
 
 
 
-// re-write this 
+// ? Removes a task from local storage and prints the task data back to the page
 function handleDeleteTask(event) {
+  const taskId = $(this).attr('data-project-id');
+  const tasks = readProjectsFromStorage();
 
+  // TODO: Loop through the projects array and remove the project with the matching id.
+
+  // ? We will use our helper function to save the projects to localStorage
+  saveProjectsToStorage(projects);
+
+  // ? Here we use our other function to print projects back to the screen
+  printProjectData();
 };
 
 // 135 - 155 complete !!
