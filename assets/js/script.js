@@ -8,20 +8,6 @@
 
 // ** Start of JavaScript File ** //
 
-//  a confirmation dialog box top left of page, a message welcoming the user to the task board, and providing a brief run through on how to use the page.
-// then calling the confirm() function, OK and Cancel buttons. The function doesn't return any value. 
-function welcomeDialog() {
-  confirm(`Welcome to your task board! A place to manage all your tasks in one place. Happy Tasking! 
-
-  1. Select the green ADD TASK button to create a new task
-  2. Enter the details of your task
-  3. All new tasks will be added in the TO DO column
-  4. DRAG your tasks to the appropriate status column
-
-  Additional:  
-  - yellow tasks = near deadline
-  - red tasks = task overdue`)
-};
 
 
 // Retrieving data from localStorage, parsing it into JavaScript objects, and providing default values if the retrieved data is falsy or not present.
@@ -57,24 +43,47 @@ function createTaskCard(task) {
     .addClass('btn btn-danger delete')
     .text('Delete')
     .attr('data-task-id', task.id);
-  cardDeleteBtn.on('click', handleDeleteTask);
+  cardDeleteBtn.on('click', handleDeleteTask, function () {
+      // Find the parent element of the delete button, which is the card itself
+      var card = $(this).closest('.card');
+  
+      // Get the unique identifier of the card or task (e.g., an id or data attribute)
+      var taskId = card.data('task-id');
+  
+      // Remove the task from the DOM
+      card.remove();
+  
+      // Remove the task from localStorage
+      var tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+      tasks = tasks.filter(function(task) {
+          return task.id !== taskId;
+      });
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+      window.location.reload();
+  });
+
 
   // set card background color based on due date
   if (task.dueDate && task.status !== 'done') {
     const now = dayjs();
     const taskDueDate = dayjs(task.dueDate, 'DD/MM/YYYY');
+
     if (now.isSame(taskDueDate, 'day')) {
       taskCard.addClass('bg-warning text-white');
+    } else if (now.isBefore(taskDueDate)) {
+      taskCard.addClass('bg-info text-white');
     } else if (now.isAfter(taskDueDate)) {
       taskCard.addClass('bg-danger text-white');
-      cardDeleteBtn.addClass('border-light');
+      cardDeleteBtn.addClass('border-light bg-success');
     }
   }
+
 
   // append card elements
   cardBody.append(cardDescription, cardDueDate, cardDeleteBtn);
   taskCard.append(cardHeader, cardBody);
 
+  // returning the card so it can be appended to the coorect lane
   return taskCard;
 
 };
@@ -105,22 +114,37 @@ function renderTaskList() {
   }
     // make task cards draggable
   $('.draggable').draggable({
-    opacity: 0.7,
+    // opacity: 0.3,
     zIndex: 100,
-    // function to clone the card being dragged so that the original card remains in place
-    helper: function (e) {
-      // check of the target of the drag event is the card itself or a child element if it is the card itself, clone it, otherwise find the parent card and clone that
-      const original = $(e.target).hasClass('ui-draggable')
-        ? $(e.target)
-        : $(e.target).closest('.ui-draggable');
-      return original.clone().css({
-        maxWidth: original.outerWidth(),
-      });
-    },
-  });
+    helper: 'original',
+    cursor: 'move',
+    revert: 'false'
+  });  
+    // helper: function (e) {
 };
 
-// this function handles a new task comes from jquery ready below - this function was originally called addTask!! 
+
+// Sample data structure representing tasks
+let task = [
+  { id: 1, title: 'Task 1', progress: 'not-started' },
+  { id: 2, title: 'Task 2', progress: 'in-progress' },
+  { id: 3, title: 'Task 3', progress: 'not-started' }
+];
+
+// Function to update the progress state of a task
+function updateProgress(taskId, newProgress) {
+  const taskIndex = tasks.findIndex(task => task.id === taskId);
+  if (taskIndex !== -1) {
+      tasks[taskIndex].progress = newProgress;
+  }
+}
+
+// Example usage: Update the progress state of a task when it is moved to the 'done' column
+updateProgress(2, 'completed');
+
+// this function handles a new task comes from jquery ready below
+// Originally called handleAddTask!
+
 function submitTask(event) {
   event.preventDefault()
   //create new task
@@ -152,8 +176,8 @@ function handleDrop(event, ui) {
     // update the task status of the dragged card
     if (task.id === parseInt(taskId)) {
       task.status = newStatus;
-    }
-  }
+    };
+  };
   // save and render
   localStorage.setItem('tasks', JSON.stringify(task));
   renderTaskList();
@@ -163,10 +187,8 @@ function handleDrop(event, ui) {
 
 // ? Removes a task from local storage and prints the task data back to the page
 function handleDeleteTask(event) {
-  const taskId = $(this).attr('data-project-id');
+  const taskId = $(this).attr('task-id');
   const tasks = readProjectsFromStorage();
-
-  // TODO: Loop through the projects array and remove the project with the matching id.
 
   // ? We will use our helper function to save the projects to localStorage
   saveProjectsToStorage(projects);
@@ -175,7 +197,7 @@ function handleDeleteTask(event) {
   printProjectData();
 };
 
-// 135 - 155 complete !!
+
 // Event listeners - jquery syntax
 $(document).ready(function () {
   // render the task list
@@ -188,6 +210,7 @@ $(document).ready(function () {
   $('.lane').droppable({
     accept: '.draggable',
     drop: handleDrop,
+    // receive: function( event, ui ) {}
   });
 
   //make due date field a date picker 
@@ -196,6 +219,24 @@ $(document).ready(function () {
     changeYear: true,
   });
 });
+
+//  a confirmation dialog box top left of page, a message welcoming the user to the task board, and providing a brief run through on how to use the page.
+// then calling the confirm() function, OK and Cancel buttons. The function doesn't return any value. 
+function welcomeDialog() {
+  confirm(`Welcome to your task board! A place to manage all your tasks in one place. Happy Tasking! 
+
+  1. Select the green ADD TASK button to create a new task
+  2. Enter the details of your task
+  3. All new tasks will be added in the TO DO column
+  4. DRAG your tasks to the appropriate status column
+
+  Additional:  
+  - Yellow tasks = Today's date 
+  - Red tasks = Task is overdue
+  - Blue tasks = Task is ahead of today's date`)
+};
+
+
 
 
 // ** End of JavaScript File ** //
