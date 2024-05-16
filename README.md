@@ -2,6 +2,9 @@
 
 Task Board Management Tool
 
+### Deployed Link: 
+https://rhiannawilson.github.io/Task-Board/
+
 ## Description
 
 This website contains a simple task board management application that allows an individual or a team to manage project tasks. This app will run in the browser and feature dynamically updated HTML and CSS powered by jQuery. For our date picker, I have also used the [Day.js](https://day.js.org/en/) library.
