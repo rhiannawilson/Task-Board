@@ -4,7 +4,7 @@ Task Board Management Tool
 
 ## Description
 
-This website contains a simple task board management application that allows an individual or a team to manage project tasks. This app will run in the browser and feature dynamically updated HTML and CSS powered by jQuery. For our date picker, we have also used the [Day.js](https://day.js.org/en/) library.
+This website contains a simple task board management application that allows an individual or a team to manage project tasks. This app will run in the browser and feature dynamically updated HTML and CSS powered by jQuery. For our date picker, I have also used the [Day.js](https://day.js.org/en/) library.
 
 
 ## User Story
@@ -49,7 +49,8 @@ The following animation demonstrates the application functionality:
 > > > - styles.css
 
 > > > images
-> > > - image of websiote - TO DO 
+> > > [text](assets/images)
+![colour coded tasks based on date](<assets/images/Img1 - Colour coded tasks based on date.png>)
 
 > > > js
 > > > - script.js
@@ -61,7 +62,8 @@ The following animation demonstrates the application functionality:
 
 ## Usage
 
-### Website Features
+### Website Features & Technical Details
+
 - HTML
 - Advanced CSS
 - Responsive Design
@@ -69,19 +71,19 @@ The following animation demonstrates the application functionality:
 - JQuery
 - Day.js
 
-### Technical Details
+#### Images 
 
-1. Background Colour ‘Whitesmoke’ - base colour
-2. Font Style ‘Darkgrey’ - typography 
-3. Colours ‘Cadetblue’ - vision and design 
+- Site Page 
+![Website Page Image](./assets/images/Img1%20-%20Colour%20coded%20tasks%20based%20on%20date.png)
 
-#### Images - to do
+- Done Column Display
+![Done Column Display Image](./assets/images/Img2%20-%20Colour%20removed%20once%20DONE%20.png)
 
-- The Main Site Page
-![Main Website Image](./assets/images/MAIN%20WEBPAGE.png)
+- Modal form
+![Modal Form Display](./assets/images/Img3%20-%20ModalForm.png)
 
-- Projects Display
-![Main Website Image](./assets/images/MY%20WORK.png)
+- Pop Up
+![Pop Up Image](./assets/images/Img3%20-%20Instructions%20Pop%20Up.png)
 
 ## Credits
 N/A
